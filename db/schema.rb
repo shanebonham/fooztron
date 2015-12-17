@@ -11,31 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120623032701) do
+ActiveRecord::Schema.define(:version => 20151217231514) do
 
   create_table "games", :force => true do |t|
-    t.integer   "white_score"
-    t.integer   "blue_score"
-    t.timestamp "created_at",  :null => false
-    t.timestamp "updated_at",  :null => false
+    t.integer  "white_score"
+    t.integer  "blue_score"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "played_positions", :force => true do |t|
-    t.integer   "game_id"
-    t.integer   "player_id"
-    t.integer   "position_cd"
-    t.timestamp "created_at",  :null => false
-    t.timestamp "updated_at",  :null => false
+    t.integer  "game_id"
+    t.integer  "player_id"
+    t.integer  "position_cd"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "played_positions", ["game_id"], :name => "index_played_positions_on_game_id"
   add_index "played_positions", ["player_id"], :name => "index_played_positions_on_player_id"
 
   create_table "players", :force => true do |t|
-    t.string    "name"
-    t.boolean   "hidden"
-    t.timestamp "created_at", :null => false
-    t.timestamp "updated_at", :null => false
+    t.string   "name"
+    t.boolean  "hidden"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "team_games", :force => true do |t|
@@ -57,11 +57,11 @@ ActiveRecord::Schema.define(:version => 20120623032701) do
   end
 
   create_table "users", :force => true do |t|
-    t.string    "email"
-    t.string    "monk_authentication_token"
-    t.boolean   "admin"
-    t.timestamp "created_at",                :null => false
-    t.timestamp "updated_at",                :null => false
+    t.string   "email"
+    t.boolean  "admin"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "uid"
   end
 
 end

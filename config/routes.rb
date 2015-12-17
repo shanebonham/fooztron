@@ -7,9 +7,14 @@ Fooztron::Application.routes.draw do
     end
   end
 
-  match 'users/login' => 'users#new'
-  match 'users/signin' => 'users#signin'
-  match 'users/signout' => 'users#signout'
+  resources :sessions, only: [:new, :create, :destroy]
+
+  post '/auth/:provider/callback', to: 'sessions#create'
+  get  '/auth/:provider/callback', to: 'sessions#create'
+
+  # match 'users/login' => 'users#new'
+  # match 'users/signin' => 'users#signin'
+  # match 'users/signout' => 'users#signout'
 
   match 'leaderboard' => 'players#leaderboard'
   match 'leaderboard/:number' => 'players#leaderboard'
