@@ -1,12 +1,18 @@
 class SessionsController < ApplicationController
+  skip_before_filter :verify_authenticity_token, only: :create
+
   def new
     redirect_to '/auth/developer'
   end
 
   def create
     session[:uid] = User.first_or_create_with_uid(auth_hash).uid
-    throw 'hi'
     redirect_to games_path
+  end
+
+  def destroy
+    session[:uid] = nil
+    redirect_to root_path
   end
 
   private
