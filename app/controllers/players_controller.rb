@@ -43,11 +43,11 @@ class PlayersController < ApplicationController
   end
 
   def create
-    @player = Player.new(params[:player])
+    @player = Player.new(player_params)
 
     respond_to do |format|
       if @player.save
-        format.html { redirect_to @player, notice: 'Player was successfully created.' }
+        format.html { redirect_to players_path, notice: 'Player was successfully created.' }
         format.json { render json: @player, status: :created, location: @player }
       else
         format.html { render action: 'new' }
@@ -60,8 +60,8 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
 
     respond_to do |format|
-      if @player.update_attributes(params[:player])
-        format.html { redirect_to @player, notice: 'Player was successfully updated.' }
+      if @player.update_attributes(player_params)
+        format.html { redirect_to players_path, notice: 'Player was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -99,5 +99,11 @@ class PlayersController < ApplicationController
         @players << player
       end
     end
+  end
+
+  private
+
+  def player_params
+    params.require(:player).permit(:name, :hidden)
   end
 end

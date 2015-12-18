@@ -1,20 +1,12 @@
 class User < ActiveRecord::Base
-  attr_accessible :monk_authentication_token, :email, :password
-  attr_accessor :password
+  validates :email, presence: true
 
-  def login!
-    res = MonkId.login!(email: email, password: password)
-    if res['success']
-      update_attributes(:monk_authentication_token => res['user']['authentication_token'])
-      self.save
-    else
-      self.errors.add(:base, res['message'])
-      false
+  def self.first_or_create_with_uid(auth_hash)
+    auth_hash = HashWithIndifferentAccess.new(auth_hash)
+    user = where(uid: auth_hash[:uid]).first_or_create do |u|
+      u.uid = auth_hash[:uid]
+      u.email = auth_hash[:info].try(:[], :email)
     end
-  end
-
-  def logout!
-    res = MonkId.logout!(authentication_token: monk_authentication_token)
-    res['success']
+    user if user.persisted?
   end
 end
