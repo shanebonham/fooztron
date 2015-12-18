@@ -4,7 +4,9 @@ class SessionsController < ApplicationController
   end
 
   def create
-    session[:user_id] = User.first_or_create_with_uid(auth_hash)
+    session[:uid] = User.first_or_create_with_uid(auth_hash).uid
+    throw 'hi'
+    redirect_to games_path
   end
 
   private

@@ -1,16 +1,10 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  protect_from_forgery with: :exception
 
   helper_method :current_user
 
   def authenticate_user!
-    session[:destination] = request.url
-    user_status = MonkId.status(authentication_token: session[:monk_authentication_token])
-    if !user_status['success'] || !user_status['user']['signed_in'] || current_user.blank?
-      session[:monk_authentication_token] = nil
-      flash[:alert] = 'You must be logged in to continue.'
-      redirect_to :users_login
-    end
+    redirect_to 'sessions#new' unless current_user
   end
 
   def set_destination
@@ -18,12 +12,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    # @_current_user ||= User.find_by_monk_authentication_token(session[:monk_authentication_token])
-  end
-
-  def login(user)
-    if user.login!
-      session[:monk_authentication_token] = user.monk_authentication_token
-    end
+    @_current_user ||= User.where(uid: session[:uid]).first
   end
 end
