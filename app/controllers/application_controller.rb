@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     session[:destination] = request.url
-    # user_status = MonkId.status(authentication_token: session[:monk_authentication_token])
+    user_status = MonkId.status(authentication_token: session[:monk_authentication_token])
     if !user_status['success'] || !user_status['user']['signed_in'] || current_user.blank?
       session[:monk_authentication_token] = nil
       flash[:alert] = 'You must be logged in to continue.'

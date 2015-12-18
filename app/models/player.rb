@@ -4,7 +4,7 @@ class Player < ActiveRecord::Base
   has_many :teams_as_offense, :class_name => 'Team', :foreign_key => :offense_id
   has_many :teams_as_defense, :class_name => 'Team', :foreign_key => :defense_id
 
-  attr_accessible :name, :hidden
+  # attr_accessible :name, :hidden
 
   def record(position = nil)
     win_count = 0
@@ -53,7 +53,7 @@ class Player < ActiveRecord::Base
         game_count += 1 if played_position.position == position
       end
     else
-      game_count = played_positions.count  
+      game_count = played_positions.count
     end
     game_count
   end

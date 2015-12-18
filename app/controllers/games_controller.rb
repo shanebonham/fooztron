@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   before_filter :set_destination
 
   def index
-    @games = Game.find(:all, :order => 'created_at DESC')
+    @games = Game.all
     @games.each do |g|
       g.played_positions.sort_by! { |p| p.position_cd }
     end

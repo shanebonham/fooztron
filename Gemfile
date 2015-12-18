@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails', '4.2.5'
 gem 'simple_enum', '~> 1.5.1'
 gem 'jquery-rails'
 gem 'typhoeus'
@@ -17,8 +17,8 @@ end
 
 group :assets do
   gem 'slim-rails'
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails'
+  gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 

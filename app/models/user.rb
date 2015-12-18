@@ -1,8 +1,4 @@
 class User < ActiveRecord::Base
-  attr_accessible :email
-  attr_accessor :password
-
-
   def self.first_or_create_with_uid(auth_hash)
     where(uid: auth_hash['uid']).first_or_create do |user|
       user.uid = auth_hash['uid']

@@ -4,6 +4,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-    throw 'hi'
+    session[:user_id] = User.first_or_create_with_uid(auth_hash)
+  end
+
+  private
+
+  def auth_hash
+    request.env['omniauth.auth']
   end
 end

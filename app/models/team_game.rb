@@ -4,5 +4,5 @@ class TeamGame < ActiveRecord::Base
   as_enum :side, :white => 0,
                  :blue => 1
 
-  attr_accessible :game, :team, :side
+  # attr_accessible :game, :team, :side
 end

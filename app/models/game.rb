@@ -4,7 +4,7 @@ class Game < ActiveRecord::Base
   has_many :team_games
   has_many :teams, :through => :team_games
 
-  attr_accessible :white_score, :blue_score, :played_positions_attributes
+  # attr_accessible :white_score, :blue_score, :played_positions_attributes
 
   accepts_nested_attributes_for :played_positions
 
