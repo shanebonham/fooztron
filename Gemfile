@@ -5,12 +5,11 @@ gem 'simple_enum', '~> 1.5.1'
 gem 'jquery-rails'
 gem 'typhoeus'
 
+gem 'pg'
 gem 'omniauth-google-oauth2'
 
-gem 'pg'
 
 group :development do
-  gem 'sqlite3'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'spring-commands-rspec'
