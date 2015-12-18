@@ -4,8 +4,6 @@ class Team < ActiveRecord::Base
   has_many :team_games
   has_many :games, :through => :team_games
 
-  # attr_accessible :defense, :offense
-
   def number_of_wins
     count = 0
     team_games.each do |team_game|

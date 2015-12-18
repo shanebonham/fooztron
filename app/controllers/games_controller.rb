@@ -5,7 +5,7 @@ class GamesController < ApplicationController
   def index
     @games = Game.all
     @games.each do |g|
-      g.played_positions.sort_by! { |p| p.position_cd }
+      g.played_positions.sort_by { |p| p.position_cd }
     end
 
     respond_to do |format|
@@ -16,7 +16,7 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @game.played_positions.sort_by! { |p| p.position_cd }
+    @game.played_positions.sort_by { |p| p.position_cd }
 
     respond_to do |format|
       format.html # show.html.erb
@@ -39,12 +39,12 @@ class GamesController < ApplicationController
 
   def edit
     @game = Game.find(params[:id])
-    @game.played_positions.sort_by! { |p| p.position_cd }
+    @game.played_positions.sort_by { |p| p.position_cd }
     @players = Player.all
   end
 
   def create
-    @game = Game.new(params[:game])
+    @game = Game.new(game_params)
     @players = Player.all
 
     respond_to do |format|
@@ -62,7 +62,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
 
     respond_to do |format|
-      if @game.update_attributes(params[:game])
+      if @game.update_attributes(game_params)
         format.html { redirect_to @game, notice: 'Game was successfully updated.' }
         format.json { head :no_content }
       else
@@ -80,5 +80,11 @@ class GamesController < ApplicationController
       format.html { redirect_to games_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def game_params
+    params.require(:game).permit(:white_score, :blue_score, { played_positions_attributes: [ :player_id, :position ] })
   end
 end
