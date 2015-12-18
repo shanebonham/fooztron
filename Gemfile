@@ -7,9 +7,7 @@ gem 'typhoeus'
 
 gem 'omniauth-google-oauth2'
 
-group :production do
-  gem 'pg', '0.12.2'
-end
+gem 'pg'
 
 group :development do
   gem 'sqlite3'
@@ -25,5 +23,6 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'rspec-rails'
   gem 'test-unit'
 end
