@@ -243,6 +243,7 @@ DEPENDENCIES
   jquery-rails
   omniauth-google-oauth2
   pg
+  pry
   pry-remote
   rails (= 4.2.5)
   rspec-rails

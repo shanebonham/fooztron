@@ -21,11 +21,11 @@
 
   <div class="field" id="field_white_score">
     <%= f.label :white_score %>
-    <%= f.select :white_score, options_for_select(10.downto(0), @game.white_score), :include_blank => true %>
+    <%= f.select :white_score, options_for_select(@game.maximum_score.downto(0), @game.white_score), :include_blank => true %>
   </div>
   <div class="field" id="field_blue_score">
     <%= f.label :blue_score %>
-    <%= f.select :blue_score, options_for_select(10.downto(0), @game.blue_score), :include_blank => true %>
+    <%= f.select :blue_score, options_for_select(@game.maximum_score.downto(0), @game.blue_score), :include_blank => true %>
   </div>
   <div class="actions">
     <%= f.submit 'GAME ON!!!' %>
