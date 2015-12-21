@@ -1,4 +1,6 @@
 class Game < ActiveRecord::Base
+  MAX_POINTS_PER_GAME = 8
+
   has_many :played_positions, :dependent => :destroy
   has_many :players, :through => :played_positions
   has_many :team_games
@@ -37,7 +39,7 @@ class Game < ActiveRecord::Base
   end
 
   def maximum_score
-    8
+    MAX_POINTS_PER_GAME
   end
 
   private
