@@ -6,8 +6,7 @@ gem 'jquery-rails'
 gem 'typhoeus'
 
 gem 'pg'
-gem 'omniauth-google-oauth2'
-
+gem 'omniauth-twitter'
 
 group :development do
   gem 'better_errors'
