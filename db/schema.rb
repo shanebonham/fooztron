@@ -9,58 +9,59 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151217231514) do
+ActiveRecord::Schema.define(version: 20151217231514) do
 
-  create_table "games", :force => true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "games", force: :cascade do |t|
     t.integer  "white_score"
     t.integer  "blue_score"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "played_positions", :force => true do |t|
+  create_table "played_positions", force: :cascade do |t|
     t.integer  "game_id"
     t.integer  "player_id"
     t.integer  "position_cd"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["game_id"], name: "index_played_positions_on_game_id", using: :btree
+    t.index ["player_id"], name: "index_played_positions_on_player_id", using: :btree
   end
 
-  add_index "played_positions", ["game_id"], :name => "index_played_positions_on_game_id"
-  add_index "played_positions", ["player_id"], :name => "index_played_positions_on_player_id"
-
-  create_table "players", :force => true do |t|
+  create_table "players", force: :cascade do |t|
     t.string   "name"
     t.boolean  "hidden"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "team_games", :force => true do |t|
+  create_table "team_games", force: :cascade do |t|
     t.integer  "team_id"
     t.integer  "game_id"
     t.integer  "side_cd"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["game_id"], name: "index_team_games_on_game_id", using: :btree
+    t.index ["team_id"], name: "index_team_games_on_team_id", using: :btree
   end
 
-  add_index "team_games", ["game_id"], :name => "index_team_games_on_game_id"
-  add_index "team_games", ["team_id"], :name => "index_team_games_on_team_id"
-
-  create_table "teams", :force => true do |t|
+  create_table "teams", force: :cascade do |t|
     t.integer  "offense_id"
     t.integer  "defense_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "users", :force => true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email"
     t.boolean  "admin"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "uid"
   end
 
