@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.5'
-gem 'simple_enum', '~> 1.5.1'
+gem 'rails', '5.0.0.beta1'
 gem 'jquery-rails'
 gem 'typhoeus'
 
