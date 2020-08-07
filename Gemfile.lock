@@ -228,6 +228,7 @@ DEPENDENCIES
   jquery-rails
   omniauth-twitter
   pg
+  pry
   pry-remote
   rails (= 4.2.5)
   rspec-rails

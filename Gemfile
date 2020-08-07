@@ -12,7 +12,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'spring-commands-rspec'
-  gem 'pry-remote'
 end
 
 group :assets do
@@ -26,4 +25,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'test-unit'
   gem 'guard-rspec'
+  gem 'pry'
+  gem 'pry-remote'
 end

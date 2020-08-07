@@ -1,4 +1,6 @@
 class Game < ActiveRecord::Base
+  MAX_POINTS_PER_GAME = 8
+
   has_many :played_positions, :dependent => :destroy
   has_many :players, :through => :played_positions
   has_many :team_games
@@ -7,7 +9,7 @@ class Game < ActiveRecord::Base
   accepts_nested_attributes_for :played_positions
 
   validates :white_score, :blue_score, :presence => true
-  validate :one_score_must_be_ten
+  validate :one_score_must_be_max
 
   before_save do
     white = Team.find_or_create_by(offense_id: played_positions[0].player.id, defense_id: played_positions[1].player.id)
@@ -24,14 +26,6 @@ class Game < ActiveRecord::Base
     (white_score - blue_score).abs
   end
 
-  def one_score_must_be_ten
-    if white_score != 10 && blue_score != 10
-      self.errors[:base] << 'One score must be 10'
-    elsif white_score == blue_score
-      self.errors[:base] << "Scores can't be the same"
-    end
-  end
-
   def winning_team
     team = Team.new
     if winner == 'white'
@@ -42,5 +36,19 @@ class Game < ActiveRecord::Base
       team.defense = played_positions.where(:position_cd => 3).first.player
     end
     team
+  end
+
+  def maximum_score
+    MAX_POINTS_PER_GAME
+  end
+
+  private
+
+  def one_score_must_be_max
+    if white_score != maximum_score && blue_score != maximum_score
+      errors[:base] << "One score must be #{maximum_score}"
+    elsif white_score == blue_score
+      errors[:base] << "Scores can't be the same"
+    end
   end
 end
