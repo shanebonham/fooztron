@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :create
 
   def new
-    redirect_to '/auth/developer'
+    redirect_to '/auth/twitter'
   end
 
   def create

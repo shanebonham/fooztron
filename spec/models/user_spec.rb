@@ -18,31 +18,19 @@ describe User do
     end
 
     context 'when the uid does not exist' do
-      context 'and there is an email in the auth_hash'
       it 'creates a new user' do
         expect do
-          User.first_or_create_with_uid(uid: 'a123', info: { email: 'heinz@pco.bu' })
+          User.first_or_create_with_uid(uid: 'a123', info: { email: 'heinz@pco.bu', nickname: 'heinz_tweets' })
         end.to change { User.count }.by(1)
       end
 
       it 'set the attributes correctly' do
-        user = User.first_or_create_with_uid(uid: 'a123', info: { email: 'heinz@pco.bz' })
+        user = User.first_or_create_with_uid(uid: 'a123', info: { email: 'heinz@pco.bz', nickname: 'heinz_tweets' })
         expect(user.uid).to eq('a123')
         expect(user.email).to eq('heinz@pco.bz')
+        expect(user.nickname).to eq('heinz_tweets')
       end
 
-      context 'and there is not an email' do
-        it 'returns nil' do
-          user = User.first_or_create_with_uid(uid: 'abc')
-          expect(user).to be_nil
-        end
-
-        it 'does not create a new user' do
-          expect do
-            User.first_or_create_with_uid(uid: 'abc')
-          end.to_not change { User.count }
-        end
-      end
     end
   end
 end
